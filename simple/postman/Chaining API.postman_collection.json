@@ -1,0 +1,155 @@
+{
+	"info": {
+		"_postman_id": "00891d9e-49e5-4379-bd14-cfc876ec5240",
+		"name": "Chaining API",
+		"description": "## Chaining API Requests\n\n### Available endpoints and examples\n---\n1) `/api/hello`\nSimple endpoint that always return simple json structure. See example below.\nRequest `GET http://<domain>/api/hello`\nResponse\n\n\t```json\n\t{\n\t\t\"hello\": \"world\"\n\t}\n\t```\n---\n2) `/api/auth/login`\nEndpoint accept post requests with empty body and returns random string of 12 characters\nRequest\n\t`POST http://<domain>/api/auth/login`\nResponse\n\t```json\n\t{\n\t\t\"token\": \"3FkiNfxfxDag\"\n\t}\n\t```",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "POST_auth_login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e8a549a3-8aeb-4e24-ac67-760519c309b4",
+						"exec": [
+							"pm.test(\"Test response status and response format\", function () {",
+							"    pm.response.to.be.ok;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Test token length\", function () {",
+							"    var response = pm.response.json();",
+							"    pm.expect(response.token.length).to.eql(12);",
+							"});",
+							"",
+							"",
+							"try {",
+							"    var response = JSON.parse(responseBody);",
+							"    postman.setEnvironmentVariable(\"token\", response.token);",
+							"} catch(e) {",
+							"    console.log(e);",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic 1234567890string",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				},
+				"description": "Request to /api/auth/login to fetch token"
+			},
+			"response": []
+		},
+		{
+			"name": "GET_hello_world",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "3dae3a8d-1a0a-4ae2-9b05-9c389acb27fe",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "524e6cec-b913-4a02-9bc9-bbe5fd2d4a7c",
+						"exec": [
+							"pm.test(\"Test response status and response format\", function () {",
+							"    pm.response.to.be.ok;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Test response hello key value\", function () {",
+							"    var response = pm.response.json();",
+							"    pm.expect(response.token.hello).to.eql(\"world\");",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Token {{token}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/hello",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"hello"
+					]
+				},
+				"description": "Making GET re\tquest to /api/hello"
+			},
+			"response": []
+		}
+	]
+}

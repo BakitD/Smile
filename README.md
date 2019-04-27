@@ -21,7 +21,7 @@ Run command
 Import collection `Chaining API.postman_collection.json` from postman directory.
 
 Then open `POST_auth_login` request and press `Send`, than check token environmnet variable.
-It must equals to token that ypu will receive in respone body. Then open `GET_hello_world`.
+It must equals to token that you will see in respone body. Then open `GET_hello_world` and press `Send`.
 Reponse body should equals to:
 ```json
 {
