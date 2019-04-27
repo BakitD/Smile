@@ -1,3 +1,10 @@
+"""
+
+Ресурсы приложения app
+
+
+"""
+
 from flask_restful import Api
 from flask.blueprints import Blueprint
 

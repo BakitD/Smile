@@ -1,3 +1,4 @@
+import os
 
-DEBUG = True
 
+DEBUG = False if os.getenv("DEBUG") == "False" else True
