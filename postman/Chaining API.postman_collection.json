@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "98e31b14-e286-4334-8ab7-7e8785038bf1",
+		"_postman_id": "9f00b7b1-1087-4687-bf86-54ada6a3d714",
 		"name": "Chaining API",
 		"description": "## Chaining API Requests\n\n### Available endpoints and examples\n---\n1) `/api/hello`\nSimple endpoint that always return simple json structure. See example below.\nRequest `GET http://<domain>/api/hello`\nResponse\n\n\t```json\n\t{\n\t\t\"hello\": \"world\"\n\t}\n\t```\n---\n2) `/api/auth/login`\nEndpoint accept post requests with empty body and returns random string of 12 characters\nRequest\n\t`POST http://<domain>/api/auth/login`\nResponse\n\t```json\n\t{\n\t\t\"token\": \"3FkiNfxfxDag\"\n\t}\n\t```",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -188,7 +188,7 @@
 							"",
 							"pm.test(\"Test response hello key value\", function () {",
 							"    var response = pm.response.json();",
-							"    pm.expect(response.token.hello).to.eql(\"world\");",
+							"    pm.expect(response.hello).to.eql(\"world\");",
 							"});",
 							"",
 							""
